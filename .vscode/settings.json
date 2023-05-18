@@ -1,0 +1,11 @@
+{
+    "python.testing.pytestArgs": [
+        "data_gathering"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.analysis.extraPaths": [
+        "./experimenting",
+        "./experimenting"
+    ]
+}

@@ -1,0 +1,4 @@
+{
+  "mean_squared_error_X_val_tranformed": "mean_squared_error(y_true=y_test, y_pred=y_pred, squared=False)",
+  "r2_score_X_val_tranformed": "r2_score(y_true=y_test, y_pred=y_pred)"
+}

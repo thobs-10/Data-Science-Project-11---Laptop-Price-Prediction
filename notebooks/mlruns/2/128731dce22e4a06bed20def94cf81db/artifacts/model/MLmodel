@@ -1,0 +1,27 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.8
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.1.2
+mlflow_version: 2.0.1
+model_uuid: 1f88b401d20448b1851ee98cfb5b1060
+run_id: 128731dce22e4a06bed20def94cf81db
+signature:
+  inputs: '[{"name": "Company", "type": "string"}, {"name": "TypeName", "type": "string"},
+    {"name": "Ram", "type": "integer"}, {"name": "Weight", "type": "float"}, {"name":
+    "Touchscreen", "type": "long"}, {"name": "Ips", "type": "long"}, {"name": "ppi",
+    "type": "double"}, {"name": "Cpu brand", "type": "string"}, {"name": "HDD", "type":
+    "long"}, {"name": "SSD", "type": "long"}, {"name": "Gpu brand", "type": "string"},
+    {"name": "os", "type": "string"}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+utc_time_created: '2023-04-06 06:52:10.420165'

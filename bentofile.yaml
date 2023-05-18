@@ -1,0 +1,11 @@
+service: "service:svc"
+labels:
+  owner: Thobela
+  stage: dev
+include:
+  - "*.py"
+python:
+  packages:
+    - pandas
+    - numpy
+    - scikit-learn
