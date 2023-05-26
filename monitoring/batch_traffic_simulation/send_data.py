@@ -6,7 +6,7 @@ from time import sleep
 import pyarrow.parquet as pq
 import requests
 
-table = pq.read_table("dataset\\feature_engineered_data\\X_test_df.parquet.gzip")
+table = pq.read_table("dataset\\feature_engineered_data\\X_test_df.parquet")
 data = table.to_pylist()
 
 
