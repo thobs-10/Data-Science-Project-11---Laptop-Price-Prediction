@@ -11,11 +11,11 @@ import logging
 
 
 # read the saved pickle packages
-# pipeline = pickle.load(open('dataset/pipe.pkl','rb'))
-df = pickle.load(open('dataset/df.pkl','rb'))
+pipeline = pickle.load(open('dataset/pipe.pkl','rb'))
+df = pickle.load(open('dataset\\df.pkl','rb'))
 service_url = "http://localhost:3000/predict"
 # def streamlit_app():
-
+model = pickle.load(open('rf_reg.pkl','rb'))
 st.title("Laptop Prediction")
 
 #laptop brand select box
@@ -47,7 +47,8 @@ gpu = st.selectbox('GPU', df['Gpu brand'].unique())
 os =  st.selectbox('OS', df['os'].unique())
 
 if st.button('Predict Price'):
-    #query point
+    # query point
+    # st.title("hello")
     ppi = None
     if touchscreen=='Yes':
         touchscreen= 1
@@ -63,17 +64,37 @@ if st.button('Predict Price'):
     X_res = int(resolution.split('x')[0])
     Y_res = int(resolution.split('x')[1])
     ppi = ((X_res**2) + (Y_res**2))**0.5/screen_size
-    query = np.array([company,laptop_type,ram,weight,touchscreen,ips,ppi,cpu,hdd,ssd,gpu,os])
 
-    query.reshape(1,12)
+    # TypeName_map=df['TypeName'].value_counts().to_dict()
+    # laptop_type=df['TypeName'].map(TypeName_map)
+    # # company
+    # company_map=df['Company'].value_counts().to_dict()
+    # company=df['Company'].map(company_map)
+    # #Cpu brand
+    # cpu_brand_map=df['Cpu brand'].value_counts().to_dict()
+    # cpu=df['Cpu brand'].map(cpu_brand_map)
+    # # Gpu brand
+    # gpu_brand_map=df['Gpu brand'].value_counts().to_dict()
+    # gpu=df['Gpu brand'].map(gpu_brand_map)
+    # # os
+    # os_map=df['os'].value_counts().to_dict()
+    # os=df['os'].map(os_map)
 
-    serialized_input_data = json.dumps(query.tolist())
-    response = requests.post(
-        service_url,
-        data=serialized_input_data,
-        headers={"content-type":"application/json"}
-    )
-    pred = response.text
+    
+    query = np.array([company,laptop_type,ram,weight,touchscreen,ips,ppi,cpu,hdd,ssd,gpu,os],dtype=object)
+
+    query = query.reshape(1,12)
+    # st.title(query)
+    # st.title(pipeline)
+    pred = pipeline.predict(query)
+    st.title("The predicted price of this configuration is " + str(int(np.exp(pred[0]))))
+    # serialized_input_data = json.dumps(query.tolist())
+    # response = requests.post(
+    #     service_url,
+    #     data=serialized_input_data,
+    #     headers={"content-type":"application/json"}
+    # )
+    # pred = response.text
     # service = load_last_service_from_step(
     #     pipeline_name="continuous_deployment_pipeline",
     #     step_name="model_deployer",
@@ -88,10 +109,10 @@ if st.button('Predict Price'):
     # pred = service.predict(query)
     # st.success(
     #     "Your Customer Satisfactory rate(range between 0 - 5) with given product details is :-{}".format(
-    #         pred
+    #         pred[0]
     #     )
     # )
-    st.title("The predicted price of this configuration is " + str(pred[0]))
+    # st.title("The predicted price of this configuration is " + str(pred[0]))
     # st.title("The predicted price of this configuration is " + str(int(np.exp(pred[0]))))
     # st.title("The predicted price of this configuration is " + str(int(np.exp(pipeline.predict(query)[0]))))
 

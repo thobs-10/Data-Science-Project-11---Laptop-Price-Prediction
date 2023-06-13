@@ -1,0 +1,30 @@
+datasets:
+  laptop:
+    column_mapping:
+      categorical_features:
+        - 'Company'
+        - 'TypeName'
+        - 'Cpu brand'
+        - 'Gpu brand'
+        - 'os'
+      numerical_features:
+        - 'Ram'
+        - 'Weight'
+        - 'Touchscreen'
+        - 'Ips'
+        - 'ppi'
+        - 'HDD'
+        - 'SSD'
+    data_format:
+      header: true
+      separator: ','
+    monitors:
+      - data_drift
+    reference_file: ./datasets/X_test_df.parquet
+service:
+  calculation_period_sec: 2
+  min_reference_size: 30
+  moving_reference: false
+  datasets_path: datasets
+  use_reference: true
+  window_size: 5
