@@ -7,11 +7,11 @@ import requests
 import json
 from typing import Tuple
 import logging
-
+import pandas as pd
 
 # read the saved pickle packages
 pipeline = pickle.load(open('dataset/pipe.pkl','rb'))
-df = pickle.load(open('dataset/df.pkl','rb'))
+df = pd.read_pickle('dataset/df.pkl','rb')
 service_url = "http://localhost:3000/predict"
 # def streamlit_app():
 model = pickle.load(open('rf_reg.pkl','rb'))
