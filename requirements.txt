@@ -1,5 +1,4 @@
 streamlit
 numpy
 pandas
-pickle-mixin==1.0.2
 scikit-learn
