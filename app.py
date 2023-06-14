@@ -11,7 +11,7 @@ import pandas as pd
 
 # read the saved pickle packages
 pipeline = pickle.load(open('dataset/pipe.pkl','rb'))
-df = pd.read_pickle(open('dataset/df.pkl','rb'))
+df = pd.read_pickle('dataset/df.pkl',compression=None)
 service_url = "http://localhost:3000/predict"
 # def streamlit_app():
 model = pickle.load(open('rf_reg.pkl','rb'))
